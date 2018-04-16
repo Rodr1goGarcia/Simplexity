@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Simplexity
 {
-    class Program
+    public enum Color
     {
-        static void Main(string[] args)
-        {
-
-        }
+        White,Black
+    }
+    class GameManager
+    {
+        
     }
 }

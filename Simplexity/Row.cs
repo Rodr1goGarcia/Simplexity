@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace Simplexity
 {
-    class Program
+    class Row
     {
-        static void Main(string[] args)
-        {
-
-        }
     }
 }
