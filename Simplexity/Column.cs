@@ -8,26 +8,66 @@ namespace Simplexity
 {
     class Column
     {
-        private Piece[] pieces = null;
+        private Stack<Piece> pieces = new Stack<Piece>();
+
+        public Column()
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                PlacePiece(new Piece(Color.Red, Shape.Square));
+            }
+        }
+
+        public Piece GetPiece(int pos)
+        {
+            return pieces.ElementAt(pos);
+        }
+        //places a piece at the top of the stack
         public void PlacePiece(Piece p)
         {
-            pieces = new Piece[pieces.Length + 1];
-            pieces[pieces.Length] = p;
+            pieces.Push(p);
         }
+        // removes and returns the top piece of the stack
         public Piece RemovePiece()
         {
-            Piece tmp = pieces[pieces.Length];
-            pieces = new Piece[pieces.Length - 1];
-            return tmp;
+            return pieces.Pop();
         }
+        //checks if someone won at the column in the column
         public bool Check(Color color)
         {
+            // c:Color, s:Shape
             int c = 0, s = 0;
-            for(int i = 0; i < pieces.Length;i++)
+            bool result = false;
+            if(pieces.Count >= 4)
             {
-                if(pieces[i].)
+                Piece previousPiece = null;
+                foreach(Piece p in pieces)
+                {
+                    if(p.Color == previousPiece.Color)
+                        c++;
+                    else  
+                        c = 0;
+
+                    if (p.Shape == previousPiece.Shape)
+                        s++;
+                    else
+                        s = 0;
+
+                    previousPiece = p;
+                }
             }
-            return true;
+            if (s >= 4 || c >= 4)
+                result = true;
+
+                return result;
         }
+
+        //converts the stack to array
+        public Piece[] ToArray()
+        {
+            return pieces.ToArray();
+        }
+        public int Count { get { return pieces.Count; } }
+            
     }
 }

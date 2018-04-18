@@ -11,12 +11,13 @@ namespace Simplexity
     {
 
         private Color color;
-        private string shape = null;
-        Piece(Color color, string shape)
+        private Shape shape;
+        public Piece(Color color, Shape shape)
         {
             this.color = color;
             this.shape = shape;
         }
-        
+        public Shape Shape { get; set; }
+        public Color Color { get; set; }
     }
 }

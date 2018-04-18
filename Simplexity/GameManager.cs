@@ -8,7 +8,11 @@ namespace Simplexity
 {
     public enum Color
     {
-        White,Black
+        White,Red
+    }
+    public enum Shape
+    {
+        Circle, Square
     }
     class GameManager
     {

@@ -10,7 +10,9 @@ namespace Simplexity
     {
         static void Main(string[] args)
         {
-
+            Board test = new Board();
+            //test.Fill();
+            test.Draw();
         }
     }
 }
