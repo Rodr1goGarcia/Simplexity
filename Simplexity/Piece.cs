@@ -17,7 +17,7 @@ namespace Simplexity
             this.color = color;
             this.shape = shape;
         }
-        public Shape Shape { get; set; }
-        public Color Color { get; set; }
+        public Shape Shape { get { return this.shape; } }
+        public Color Color { get { return this.color; } }
     }
 }

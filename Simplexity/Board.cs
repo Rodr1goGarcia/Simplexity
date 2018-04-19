@@ -16,12 +16,12 @@ namespace Simplexity
         public void Draw()
         {
             //string tmpString = null;
-            //for(int i = columns.Length; i > 0; i--)
+            //for (int i = columns.Length; i > 0; i--)
             //{
             //    tmpString = null;
-            //    for(int j = 0; j < 7; j++)
+            //    for (int j = 0; j < 7; j++)
             //    {
-            //        if(columns[i] == null)
+            //        if (columns[i] == null)
             //        {
             //            tmpString += "| ";
             //        }
@@ -38,22 +38,29 @@ namespace Simplexity
             //    }
             //    Console.WriteLine(tmpString);
             //}
-           for(int i = 0; i < columns.Length;i++)
+            for (int i = 0; i < columns.Length; i++)
             {
-                for(int j = 0; j < columns[i].Count; j++)
+                for (int j = 0; j < columns[i].Count; j++)
                 {
-                    switch(columns[i].GetPiece(j).Shape)
+                    switch (columns[i].GetPiece(j).Color)
                     {
-                        case Shape.Circle:
-                            Console.Write("C ");
+                        case Color.Red:
+                            if (columns[i].GetPiece(j).Shape == Shape.Square)
+                                Console.Write("R ");
+                            else
+                                Console.Write("r ");
                             break;
-                        case Shape.Square:
-                            Console.Write("S ");
+                        case Color.White:
+                            if (columns[i].GetPiece(j).Shape == Shape.Square)
+                                Console.Write("W ");
+                            else
+                                Console.Write("w ");
                             break;
                     }
                 }
                 Console.WriteLine();
             }
+
         }
 
         void Update()

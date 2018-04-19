@@ -12,20 +12,21 @@ namespace Simplexity
 
         public Column()
         {
-            for (int i = 0; i < 6; i++)
-            {
-                PlacePiece(new Piece(Color.Red, Shape.Square));
-            }
+            //for (int i = 0; i < 6; i++)
+            //{
+            //    PlacePiece(new Piece(Color.White, Shape.Square));
+            //}
         }
 
         public Piece GetPiece(int pos)
         {
             return pieces.ElementAt(pos);
+           
         }
         //places a piece at the top of the stack
         public void PlacePiece(Piece p)
         {
-            pieces.Push(p);
+            pieces.Push(p); 
         }
         // removes and returns the top piece of the stack
         public Piece RemovePiece()
@@ -38,14 +39,14 @@ namespace Simplexity
             // c:Color, s:Shape
             int c = 0, s = 0;
             bool result = false;
-            if(pieces.Count >= 4)
+            if (pieces.Count >= 4)
             {
                 Piece previousPiece = null;
-                foreach(Piece p in pieces)
+                foreach (Piece p in pieces)
                 {
-                    if(p.Color == previousPiece.Color)
+                    if (p.Color == previousPiece.Color)
                         c++;
-                    else  
+                    else
                         c = 0;
 
                     if (p.Shape == previousPiece.Shape)
@@ -59,7 +60,7 @@ namespace Simplexity
             if (s >= 4 || c >= 4)
                 result = true;
 
-                return result;
+            return result;
         }
 
         //converts the stack to array
@@ -68,6 +69,6 @@ namespace Simplexity
             return pieces.ToArray();
         }
         public int Count { get { return pieces.Count; } }
-            
+
     }
 }
