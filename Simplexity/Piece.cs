@@ -17,6 +17,11 @@ namespace Simplexity
             this.color = color;
             this.shape = shape;
         }
+        public Piece()
+        {
+            this.color = Color.None;
+            this.shape = Shape.None;
+        }
         public Shape Shape { get { return this.shape; } }
         public Color Color { get { return this.color; } }
     }

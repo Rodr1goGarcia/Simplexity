@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 
 namespace Simplexity
 {
-    public enum Color
+    class Player
     {
-        White,Red, None
-    }
-    public enum Shape
-    {
-        Circle, Square, None
-    }
-    class GameManager
-    {
-        
+        private Color color;
+
+        public void AssignColor(Color color)
+        {
+            this.color = color;
+        }
+
     }
 }

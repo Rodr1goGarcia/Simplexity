@@ -41,7 +41,7 @@ namespace Simplexity
             bool result = false;
             if (pieces.Count >= 4)
             {
-                Piece previousPiece = null;
+                Piece previousPiece = new Piece(Color.None, Shape.None);
                 foreach (Piece p in pieces)
                 {
                     if (p.Color == previousPiece.Color)
@@ -56,6 +56,7 @@ namespace Simplexity
 
                     previousPiece = p;
                 }
+                Console.WriteLine("c: " + c + "s = " + s);
             }
             if (s >= 4 || c >= 4)
                 result = true;
@@ -66,7 +67,23 @@ namespace Simplexity
         //converts the stack to array
         public Piece[] ToArray()
         {
-            return pieces.ToArray();
+            Piece[] tmp = new Piece[7] { new Piece(Color.None, Shape.None), new Piece(Color.None, Shape.None), new Piece(Color.None, Shape.None), new Piece(Color.None, Shape.None), new Piece(Color.None, Shape.None), new Piece(Color.None, Shape.None), new Piece(Color.None, Shape.None), };
+
+            pieces.CopyTo(tmp, tmp.Length - pieces.Count);
+            return invertArray(tmp);
+        }
+        Piece[] invertArray(Piece[] a)
+        {
+            Piece[] tmp1 = new Piece[a.Length];
+            int tmp = a.Length -1;
+            
+            for (int i = 0; i < tmp1.Length;i++)
+            {
+                tmp1[i] = a[tmp--];
+                
+            }
+            return tmp1;
+
         }
         public int Count { get { return pieces.Count; } }
 

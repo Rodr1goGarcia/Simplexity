@@ -8,64 +8,112 @@ namespace Simplexity
 {
     class Board
     {
+        int posC = 0;
+        bool shapeC = true;
         Column[] columns = new Column[7] { new Column(), new Column(), new Column(), new Column(), new Column(), new Column(), new Column() };
         public Board()
         {
 
         }
+
+        public void PlacePiece()
+        {
+            switch(Console.ReadKey().Key)
+            {
+                case ConsoleKey.LeftArrow:
+                    if (posC <= 0)
+                        posC = 6;
+                    else
+                        posC--;
+                    break;
+                case ConsoleKey.RightArrow:
+                    if (posC >= 6)
+                        posC = 0;
+                    else
+                        posC++;
+                    break;
+                case ConsoleKey.Enter:
+                    if (shapeC)
+                        columns[posC].PlacePiece(new Piece(Color.White, Shape.Circle));
+                    else
+                        columns[posC].PlacePiece(new Piece(Color.White, Shape.Square));
+                    break;
+                case ConsoleKey.UpArrow:
+                    if (shapeC)
+                        shapeC = false;
+                    else
+                        shapeC = true;
+                    break;
+                case ConsoleKey.DownArrow:
+                    if (shapeC)
+                        shapeC = false;
+                    else
+                        shapeC = true;
+                    break;
+            }
+            
+        }
         public void Draw()
         {
-            //string tmpString = null;
-            //for (int i = columns.Length; i > 0; i--)
-            //{
-            //    tmpString = null;
-            //    for (int j = 0; j < 7; j++)
-            //    {
-            //        if (columns[i] == null)
-            //        {
-            //            tmpString += "| ";
-            //        }
-            //        switch (columns[i].GetPiece(j).Shape)
-            //        {
-            //            case Shape.Circle:
-            //                tmpString += "C ";
-            //                break;
-            //            case Shape.Square:
-            //                tmpString += "S ";
-            //                break;
-            //        }
-            //        //tmpString += "| ";
-            //    }
-            //    Console.WriteLine(tmpString);
-            //}
+            Console.Clear();
+            string tmpString = null;
+            for (int i = 0; i < posC;i++)
+            {
+                tmpString += "  ";
+            }
+            if (shapeC)
+            {
+                Console.WriteLine(tmpString + "W");
+
+            }
+            else
+                Console.WriteLine(tmpString + "w");
+            Console.WriteLine(tmpString += "v");
+            Piece[] tmpPieces = new Piece[7];
+            int tmpInt = 6;
             for (int i = 0; i < columns.Length; i++)
             {
-                for (int j = 0; j < columns[i].Count; j++)
+                tmpString = null;
+                
+                for (int j = 0; j < 7; j++)
                 {
-                    switch (columns[i].GetPiece(j).Color)
+                    tmpPieces = columns[j].ToArray();
+                    switch (tmpPieces[tmpInt].Color)
                     {
                         case Color.Red:
-                            if (columns[i].GetPiece(j).Shape == Shape.Square)
-                                Console.Write("R ");
+                            if (tmpPieces[tmpInt].Shape == Shape.Square)
+                                tmpString += "R ";
                             else
-                                Console.Write("r ");
+                                tmpString += "r ";
                             break;
                         case Color.White:
-                            if (columns[i].GetPiece(j).Shape == Shape.Square)
-                                Console.Write("W ");
+                            if (tmpPieces[tmpInt].Shape == Shape.Square)
+                                tmpString += "W ";
                             else
-                                Console.Write("w ");
+                                tmpString += "w ";
+                            break;
+                        case Color.None:
+                            tmpString += "| ";
                             break;
                     }
+                   
                 }
-                Console.WriteLine();
+                tmpInt--;
+                Console.WriteLine(tmpString);
+                
+               
             }
-
+           
+            
         }
 
-        void Update()
+        public void Update()
         {
-
+            for (int i = 0; i < columns.Length; i++)
+            {
+                if (columns[i].Check(Color.White))
+                    Console.WriteLine("TRUE");
+            }
         }
         public void Fill()
         {
@@ -74,7 +122,7 @@ namespace Simplexity
             wS = rS = 11;
             int wP = 21, rP = 21;
             int tmpCol, tmp;
-            Random random = new Random(100);
+            Random random = new Random();
             while (wP > 0 || rP > 0)
             {
                 tmpCol = random.Next(0, 7);

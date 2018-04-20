@@ -11,8 +11,15 @@ namespace Simplexity
         static void Main(string[] args)
         {
             Board test = new Board();
-            test.Fill();
-            test.Draw();
+           for(; ; )
+            {
+               
+                test.Draw();
+                
+                test.PlacePiece();
+                test.Update();
+
+            }
             
         }
     }
