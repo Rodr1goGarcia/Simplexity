@@ -19,26 +19,24 @@ namespace Simplexity
         public int RoundPieces { get { return this.roundPieces; } set { this.roundPieces = value; } }
         public int SquarePieces { get { return this.squarePieces; } set { this.squarePieces = value; } }
         public Color Color { get { return this.color; } }
-
         public void AssignColor(Color color)
         {
             this.color = color;
         }
-
         public Player(GameManager gm)
         {
             this.gm = gm;
             this.roundPieces = 10;
             this.squarePieces = 11;
         }
-
         public Player()
         {
+           
             this.roundPieces = 10;
             this.squarePieces = 11;
         }
-
-        public void Play(Column[] col)
+       
+        public bool Play(Column[] col)
         {
             bool pressedEnter = false;
             Piece tmpP = new Piece();
@@ -57,9 +55,9 @@ namespace Simplexity
                         posC++;
                     break;
                 case ConsoleKey.Enter:
-                    if (shapeC && col[posC].Count < 7)
+                    if (shapeC)
                         tmpP = new Piece(this.color, Shape.Round);
-                    else if (col[posC].Count < 7)
+                    else
                         tmpP = new Piece(this.color, Shape.Square);
                     pressedEnter = true;
                     break;
@@ -76,11 +74,24 @@ namespace Simplexity
                         shapeC = true;
                     break;
             }
-            if (pressedEnter)
-            {
+            if (this.roundPieces < 0 && shapeC)
+                shapeC = false;
+            else if (this.squarePieces < 0 && !shapeC)
+                shapeC = true;
+            if (pressedEnter && col[posC].Count < 7)
+            {  
                 col[posC].PlacePiece(tmpP);
+                if (tmpP.Shape == Shape.Round)
+                {
+                    this.roundPieces--;
+                }
+                else
+                    this.squarePieces--;
+                return true;
             }
-
+            else
+                return false;
         }
+
     }
 }
