@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 
 namespace Simplexity
 {
+    //some global enums
     public enum Color
     {
-        White,Red, None
+        White, Red, None
     }
     public enum Shape
     {
-        Circle, Square, None
+        Round, Square, None
     }
     class GameManager
     {
-
+       
         private int currentPlayer = 0;
         public int CurrentPlayer { get; set; }
         private Player[] players = new Player[2] { new Player(), new Player() };
+        
 
         public void NextTurn()
         {
@@ -28,12 +30,11 @@ namespace Simplexity
             else
                 currentPlayer++;
         }
-
         public void Update(Board board, Player player)
         {
             board.shapeC = player.shapeC;
             board.posC = player.posC;
         }
-
+        
     }
 }

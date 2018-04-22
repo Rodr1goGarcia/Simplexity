@@ -23,20 +23,21 @@ namespace Simplexity
             {
                 players[0].AssignColor(Color.White);
                 players[1].AssignColor(Color.Red);
-
-                for (; ; )
-                {
-                    //gamemanager.Update(test, players[gamemanager.CurrentPlayer]);
-
-                    test.Draw();
-
-                    players[gamemanager.CurrentPlayer].Play(test.Columns);
-                    gamemanager.Update(test, players[gamemanager.CurrentPlayer]);
-                    test.Draw();
-
-
-                }
             }
+
+            for (; ; )
+            {
+                //gamemanager.Update(test, players[gamemanager.CurrentPlayer]);
+           
+                test.Draw();
+                
+                players[gamemanager.CurrentPlayer].Play(test.Columns);
+                gamemanager.Update(test, players[gamemanager.CurrentPlayer]);
+                test.Draw();
+                
+
+            }
+
         }
     }
 }

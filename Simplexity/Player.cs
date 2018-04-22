@@ -13,31 +13,31 @@ namespace Simplexity
         private int squarePieces;
         public int posC;
         public bool shapeC;
+        //public int PosC { get{ return this.posC; } set { this.posC = value; } }
+        //public bool ShapeC { get { return this.ShapeC; } set { this.ShapeC = value; } }
+    
 
         private GameManager gm;
 
         public int RoundPieces { get { return this.roundPieces; } set { this.roundPieces = value; } }
         public int SquarePieces { get { return this.squarePieces; } set { this.squarePieces = value; } }
         public Color Color { get { return this.color; } }
-
         public void AssignColor(Color color)
         {
             this.color = color;
         }
-
         public Player(GameManager gm)
         {
             this.gm = gm;
             this.roundPieces = 10;
             this.squarePieces = 11;
         }
-
         public Player()
         {
             this.roundPieces = 10;
             this.squarePieces = 11;
         }
-
+       
         public void Play(Column[] col)
         {
             bool pressedEnter = false;
@@ -76,11 +76,11 @@ namespace Simplexity
                         shapeC = true;
                     break;
             }
-            if (pressedEnter)
+            if(pressedEnter)
             {
                 col[posC].PlacePiece(tmpP);
             }
-
         }
+
     }
 }
