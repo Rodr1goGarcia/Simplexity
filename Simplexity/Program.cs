@@ -30,11 +30,14 @@ namespace Simplexity
                 //gamemanager.Update(test, players[gamemanager.CurrentPlayer]);
            
                 test.Draw();
-                
-                players[gamemanager.CurrentPlayer].Play(test.Columns);
+
+                if (players[gamemanager.CurrentPlayer].Play(test.Columns))
+                {
+                    gamemanager.NextTurn();
+                };
                 gamemanager.Update(test, players[gamemanager.CurrentPlayer]);
-                test.Draw();
                 
+            test.Draw();
 
             }
 

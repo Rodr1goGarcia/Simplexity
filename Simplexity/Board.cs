@@ -10,8 +10,7 @@ namespace Simplexity
     {
         public int posC = 0;
         public bool shapeC = false;
-        //public int PosC { get { return this.posC; } set { this.posC = value; } }
-        //public bool ShapeC { get { return this.ShapeC; } set { this.ShapeC = value; } }
+
         private GameManager gm;
         Column[] columns = new Column[7] { new Column(), new Column(),
                                            new Column(), new Column(),
@@ -22,12 +21,12 @@ namespace Simplexity
         {
             this.gm = gm;
         }
-        public bool checkHorizontal(int row)
+        public bool CheckHorizontal(int row)
         {
             int c, s;
             c = s = 1;
             Piece previousPiece = new Piece();
-            for(int i = 0; i<7;i++)
+            for (int i = 0; i < 7; i++)
             {
                 if (previousPiece.Color == columns[i].ToArray()[row].Color && columns[i].ToArray()[row].Color != Color.None)
                     c++;
@@ -43,7 +42,7 @@ namespace Simplexity
             else
                 return false;
         }
-        public bool checkDiagonal(int col, int row)
+        public bool CheckDiagonal(int col, int row)
         {
             Piece previousPiece = new Piece();
             int c, s;
@@ -91,11 +90,13 @@ namespace Simplexity
             else
                 return false;
         }
-       
+
         //function that draws the board
         public void Draw()
         {
             Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine(gm.CurrentPlayerColor);
             string tmpString = null;
             for (int i = 0; i < posC; i++)
             {
@@ -103,10 +104,19 @@ namespace Simplexity
             }
             if (shapeC)
             {
-                Console.WriteLine(tmpString + "w");
+                if (gm.CurrentPlayerColor == Color.White)
+                    Console.WriteLine("    " + tmpString + "w");
+                else
+                    Console.WriteLine("    " + tmpString + "r");
             }
             else
-                Console.WriteLine(tmpString + "W");
+            {
+                if (gm.CurrentPlayerColor == Color.White)
+                    Console.WriteLine("    " + tmpString + "W");
+                else
+                    Console.WriteLine("    " + tmpString + "R");
+            }
+            Console.Write("    ");
             Console.WriteLine(tmpString += "v");
             Piece[] tmpPieces = new Piece[7];
             int tmpInt = 6;
@@ -136,15 +146,16 @@ namespace Simplexity
                     }
                 }
                 tmpInt--;
-                Console.WriteLine(tmpString);
+                Console.WriteLine("    " + tmpString);
             }
+            Console.WriteLine("   " + "---------------");
         }
 
         public void Update()
         {
             foreach (Column c in columns)
             {
-                if (c.Check(Color.White))
+                if (c.Check())
                     Console.WriteLine("TRUE");
             }
         }

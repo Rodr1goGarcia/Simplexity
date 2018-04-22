@@ -13,9 +13,6 @@ namespace Simplexity
         private int squarePieces;
         public int posC;
         public bool shapeC;
-        //public int PosC { get{ return this.posC; } set { this.posC = value; } }
-        //public bool ShapeC { get { return this.ShapeC; } set { this.ShapeC = value; } }
-    
 
         private GameManager gm;
 
@@ -34,11 +31,12 @@ namespace Simplexity
         }
         public Player()
         {
+           
             this.roundPieces = 10;
             this.squarePieces = 11;
         }
        
-        public void Play(Column[] col)
+        public bool Play(Column[] col)
         {
             bool pressedEnter = false;
             Piece tmpP = new Piece();
@@ -57,9 +55,9 @@ namespace Simplexity
                         posC++;
                     break;
                 case ConsoleKey.Enter:
-                    if (shapeC && col[posC].Count < 7)
+                    if (shapeC)
                         tmpP = new Piece(this.color, Shape.Round);
-                    else if (col[posC].Count < 7)
+                    else
                         tmpP = new Piece(this.color, Shape.Square);
                     pressedEnter = true;
                     break;
@@ -76,10 +74,19 @@ namespace Simplexity
                         shapeC = true;
                     break;
             }
-            if(pressedEnter)
-            {
+            if (pressedEnter && col[posC].Count < 7)
+            {  
                 col[posC].PlacePiece(tmpP);
+                if (tmpP.Shape == Shape.Round)
+                {
+                    this.roundPieces--;
+                }
+                else
+                    this.squarePieces--;
+                return true;
             }
+            else
+                return false;
         }
 
     }

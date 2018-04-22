@@ -22,7 +22,7 @@ namespace Simplexity
             pieces.Push(p); 
         }
         //checks if someone won at the column in the column
-        public bool Check(Color color)
+        public bool Check()
         {
             // c:Color, s:Shape
             int c = 1, s = 1;

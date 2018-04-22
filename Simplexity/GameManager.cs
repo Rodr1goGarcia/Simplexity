@@ -19,10 +19,17 @@ namespace Simplexity
     {
        
         private int currentPlayer = 0;
+        private Color currentPlayerColor = Color.None;
         public int CurrentPlayer { get; set; }
+        public Color CurrentPlayerColor { get { return this.currentPlayerColor; } }
         private Player[] players = new Player[2] { new Player(), new Player() };
-        
+        public GameManager()
+        {
 
+        }
+        
+        
+        // method that changes the currentPlayer
         public void NextTurn()
         {
             if (currentPlayer == 1)
@@ -32,6 +39,7 @@ namespace Simplexity
         }
         public void Update(Board board, Player player)
         {
+            this.currentPlayerColor = player.Color;
             board.shapeC = player.shapeC;
             board.posC = player.posC;
         }
