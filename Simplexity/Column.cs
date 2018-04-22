@@ -43,7 +43,7 @@ namespace Simplexity
 
                     previousPiece = p;
                 }
-                Console.WriteLine("c: " + c + " s = " + s);
+               
             
             if (s >= 4 || c >= 4)
                 result = true;
@@ -63,7 +63,7 @@ namespace Simplexity
             return InvertArray(tmp);
         }
         // invert the position of the elements of the array
-        Piece[] InvertArray(Piece[] a)
+        private Piece[] InvertArray(Piece[] a)
         {
             Piece[] tmp1 = new Piece[a.Length];
             int tmp = a.Length -1;
@@ -75,6 +75,10 @@ namespace Simplexity
             }
             return tmp1;
 
+        }
+        public Piece Peek()
+        {
+            return this.pieces.Peek();
         }
         public int Count { get { return pieces.Count; } }
 

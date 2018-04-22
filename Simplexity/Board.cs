@@ -21,6 +21,7 @@ namespace Simplexity
         {
             this.gm = gm;
         }
+        //checks the win condition at the horizontal
         public bool CheckHorizontal(int row)
         {
             int c, s;
@@ -37,11 +38,13 @@ namespace Simplexity
                 else
                     s = 1;
             }
+            Console.WriteLine("C: " + c + " S: " + s);
             if (s >= 4 || c >= 4)
                 return true;
             else
                 return false;
         }
+        //checks the win condition at the diagonals
         public bool CheckDiagonal(int col, int row)
         {
             Piece previousPiece = new Piece();
@@ -85,6 +88,7 @@ namespace Simplexity
                     s = 1;
                 tmpRow++;
             }
+            Console.WriteLine("C: " + c + " S: " + s);
             if (s >= 4 || c >= 4)
                 return true;
             else
@@ -96,7 +100,6 @@ namespace Simplexity
         {
             Console.Clear();
             Console.WriteLine();
-            Console.WriteLine(gm.CurrentPlayerColor);
             string tmpString = null;
             for (int i = 0; i < posC; i++)
             {
@@ -149,15 +152,29 @@ namespace Simplexity
                 Console.WriteLine("    " + tmpString);
             }
             Console.WriteLine("   " + "---------------");
+            Console.WriteLine("  " + "Playing: Player " + (gm.CurrentPlayer + 1));
         }
-
-        public void Update()
+        //function that checks if the win condition has been reached
+        public bool CheckForWin()
         {
+            int playerN = (gm.CurrentPlayer == 0) ? 2 : 1;
             foreach (Column c in columns)
             {
                 if (c.Check())
-                    Console.WriteLine("TRUE");
+                {
+                    Console.WriteLine($"Player {playerN} won!");
+                    return true;
+                }       
             }
+            for (int i = 0; i < 7; i++)
+            {
+                if (CheckHorizontal(i))
+                {
+                    Console.WriteLine($"Player {playerN} won!");
+                    return true;
+                }
+            }
+            return false;
         }
 
     }

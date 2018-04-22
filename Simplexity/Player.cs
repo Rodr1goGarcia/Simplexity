@@ -74,6 +74,10 @@ namespace Simplexity
                         shapeC = true;
                     break;
             }
+            if (this.roundPieces < 0 && shapeC)
+                shapeC = false;
+            else if (this.squarePieces < 0 && !shapeC)
+                shapeC = true;
             if (pressedEnter && col[posC].Count < 7)
             {  
                 col[posC].PlacePiece(tmpP);
